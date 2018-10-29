@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        <h:form id="formulario">
+            <p:growl id="growl" showDetail="true" />
+            <ui:include src="./plantilla_menu.xhtml" />
+            
+            <p:panel header="Registro de Productos">
+                <p:panelGrid columns="2">
+                    <p:outputLabel value="Nombre" />
+                    <p:inputText value="#{mbProducto.producto.nombre}" />
+                    <p:outputLabel value="Precio de Costo" />
+                    <p:inputText value="#{mbProducto.producto.pCosto}" />
+                    <p:outputLabel value="Precio de Venta" />
+                    <p:inputText value="#{mbProducto.producto.pVenta}" />
+                    <p:outputLabel value="Categoria" />
+                    <p:selectOneMenu value="#{mbProducto.categoriaSeleccionada}">
+                        <f:selectItems value="#{mbProducto.comboCategorias}" />
+                    </p:selectOneMenu>
+                    
+                </p:panelGrid>
+                
+                <p:commandButton value="Guardar" update=":formulario"
+                                 action="#{mbProducto.accionGuardar()}"/>
+                
+                
+            </p:panel>
+            <br/>
+            <p:panel header="Productos Registrados">
+                <p:dataTable value="#{mbProducto.productos}" var="f">
+                    <p:column headerText="Id">
+                        <p:outputLabel value="#{f.id}" />
+                    </p:column>
+                    <p:column headerText="Nombre">
+                        <p:outputLabel value="#{f.nombre}" />
+                    </p:column>
+                    <p:column headerText="Costo">
+                        <p:outputLabel value="#{f.pCosto}" />
+                    </p:column>
+                    <p:column headerText="Venta">
+                        <p:outputLabel value="#{f.pVenta}" />
+                    </p:column>
+                    <p:column headerText="Categoria">
+                        <p:outputLabel value="#{f.categoria.nombre}" />
+                    </p:column>
+                    
+                    
+                </p:dataTable>
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+
